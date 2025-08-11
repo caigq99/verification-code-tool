@@ -1,0 +1,16 @@
+{
+    "pages": [
+        "pages/splash/splash",
+        "pages/index/index",
+        "pages/software-select/software-select",
+        "pages/code/code",
+        "pages/easter/easter",
+        "pages/validity/validity",
+        "pages/validity-select/validity-select"
+    ],
+    "window": {
+        "navigationBarTextStyle": "white",
+        "navigationStyle": "custom",
+        "backgroundColor": "#000000"
+    }
+}

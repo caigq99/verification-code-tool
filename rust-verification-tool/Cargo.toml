@@ -1,0 +1,56 @@
+[package]
+name = "verification-tool"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "验证码获取工具 - Rust版本"
+license = "MIT"
+
+[[bin]]
+name = "verification-tool"
+path = "src/main.rs"
+
+[dependencies]
+# GUI框架
+eframe = "0.28"
+egui = "0.28"
+
+# HTTP客户端
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+tokio = { version = "1.0", features = ["full"] }
+
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 加密
+sha2 = "0.10"
+hmac = "0.12"
+aes = "0.8"
+cbc = "0.1"
+base64 = "0.22"
+rand = "0.8"
+
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+
+# 日志
+log = "0.4"
+env_logger = "0.11"
+
+# 错误处理
+anyhow = "1.0"
+thiserror = "1.0"
+
+# 异步运行时
+futures = "0.3"
+
+# 剪贴板
+arboard = "3.4"
+
+[dev-dependencies]
+# 测试框架
+tokio-test = "0.4"
+mockito = "1.4"
+
+

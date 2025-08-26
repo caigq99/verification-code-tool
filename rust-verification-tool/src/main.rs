@@ -87,6 +87,153 @@ fn setup_custom_fonts(ctx: &egui::Context) {
         }
     }
 
+    // 尝试加载macOS系统中文字体
+    #[cfg(target_os = "macos")]
+    {
+        // 尝试加载苹方字体 (PingFang SC)
+        if let Ok(font_data) = std::fs::read("/System/Library/Fonts/PingFang.ttc") {
+            fonts.font_data.insert(
+                "PingFang".to_owned(),
+                egui::FontData::from_owned(font_data),
+            );
+
+            // 将中文字体设置为最高优先级
+            fonts
+                .families
+                .entry(egui::FontFamily::Proportional)
+                .or_default()
+                .insert(0, "PingFang".to_owned());
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Monospace)
+                .or_default()
+                .push("PingFang".to_owned());
+
+            ctx.set_fonts(fonts);
+            return;
+        }
+
+        // 如果苹方字体不可用，尝试华文黑体
+        if let Ok(font_data) = std::fs::read("/System/Library/Fonts/STHeiti Light.ttc") {
+            fonts.font_data.insert(
+                "STHeiti".to_owned(),
+                egui::FontData::from_owned(font_data),
+            );
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Proportional)
+                .or_default()
+                .insert(0, "STHeiti".to_owned());
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Monospace)
+                .or_default()
+                .push("STHeiti".to_owned());
+
+            ctx.set_fonts(fonts);
+            return;
+        }
+
+        // 尝试华文宋体
+        if let Ok(font_data) = std::fs::read("/System/Library/Fonts/Songti.ttc") {
+            fonts.font_data.insert(
+                "Songti".to_owned(),
+                egui::FontData::from_owned(font_data),
+            );
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Proportional)
+                .or_default()
+                .insert(0, "Songti".to_owned());
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Monospace)
+                .or_default()
+                .push("Songti".to_owned());
+
+            ctx.set_fonts(fonts);
+            return;
+        }
+
+        // 尝试华文楷体
+        if let Ok(font_data) = std::fs::read("/System/Library/Fonts/Kaiti.ttc") {
+            fonts.font_data.insert(
+                "Kaiti".to_owned(),
+                egui::FontData::from_owned(font_data),
+            );
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Proportional)
+                .or_default()
+                .insert(0, "Kaiti".to_owned());
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Monospace)
+                .or_default()
+                .push("Kaiti".to_owned());
+
+            ctx.set_fonts(fonts);
+            return;
+        }
+    }
+
+    // 尝试加载Linux系统中文字体
+    #[cfg(target_os = "linux")]
+    {
+        // 尝试加载思源黑体
+        if let Ok(font_data) = std::fs::read("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc") {
+            fonts.font_data.insert(
+                "NotoSansCJK".to_owned(),
+                egui::FontData::from_owned(font_data),
+            );
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Proportional)
+                .or_default()
+                .insert(0, "NotoSansCJK".to_owned());
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Monospace)
+                .or_default()
+                .push("NotoSansCJK".to_owned());
+
+            ctx.set_fonts(fonts);
+            return;
+        }
+
+        // 尝试加载文泉驿微米黑
+        if let Ok(font_data) = std::fs::read("/usr/share/fonts/truetype/wqy/wqy-microhei.ttc") {
+            fonts.font_data.insert(
+                "WenQuanYi".to_owned(),
+                egui::FontData::from_owned(font_data),
+            );
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Proportional)
+                .or_default()
+                .insert(0, "WenQuanYi".to_owned());
+
+            fonts
+                .families
+                .entry(egui::FontFamily::Monospace)
+                .or_default()
+                .push("WenQuanYi".to_owned());
+
+            ctx.set_fonts(fonts);
+            return;
+        }
+    }
+
     // 如果无法加载系统字体，使用默认字体
     println!("警告: 无法加载中文字体，将使用默认字体，中文可能显示为方块");
 }
